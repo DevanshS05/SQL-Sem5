@@ -1,0 +1,36 @@
+We have to create tables which corresponds to the following schema :
+employee(employee-name,street,city,email-id)
+works(employee-name,company-name,salary)
+company(company-name,city)
+manages(employee-name,manager-name)
+
+The solutions to above are as follows :
+1 )
+CREATE TABLE employee (
+  employeeName varchar(30) NOT NULL PRIMARY KEY,
+  street varchar(30),
+  city varchar(30),
+  emailID varchar(30)
+  );
+  
+2 )
+CREATE TABLE works (
+	employeeName varchar(30) NOT NULL PRIMARY KEY,
+	companyName varchar(30) UNIQUE,
+	salary varchar(10),
+	FOREIGN KEY (employeeName) REFERENCES employee(employeeName)
+);
+
+3)
+CREATE TABLE company (
+	companyName varchar(30) NOT NULL PRIMARY KEY,
+	city varchar(30),
+	FOREIGN KEY (companyName) REFERENCES works(companyName)
+);
+
+4)
+CREATE TABLE manages (
+	employeeName varchar(30) PRIMARY KEY NOT NULL,
+	managerName varchar(30),
+	FOREIGN KEY (employeename) REFERENCES employee(employeeName)
+);	
