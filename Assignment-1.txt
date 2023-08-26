@@ -1,10 +1,11 @@
-We have to create tables which corresponds to the following schema :
+/* We have to create tables which corresponds to the following schema :
 employee(employee-name,street,city,email-id)
 works(employee-name,company-name,salary)
 company(company-name,city)
 manages(employee-name,manager-name)
+*/
 
-The solutions to above are as follows :
+--The solutions to above are as follows :
 1 )
 CREATE TABLE employee (
   employeeName varchar(30) NOT NULL PRIMARY KEY,
@@ -34,3 +35,69 @@ CREATE TABLE manages (
 	managerName varchar(30),
 	FOREIGN KEY (employeename) REFERENCES employee(employeeName)
 );	
+
+
+Queries : 
+1) 
+SELECT employeeName 
+FROM works 
+WHERE companyName='First Bank Corporation';
+
+2) 
+SELECT employeeName 
+FROM works 
+WHERE companyName='First Bank Corporation' OR companyName='Yes Bank Corporation';
+
+3) 
+SELECT employeeName 
+FROM works 
+WHERE salary BETWEEN 20000 AND 50000;
+
+4) 
+SELECT name,city 
+FROM employee 
+INNER JOIN works ON employee.employeeName = works.employeeName
+WHERE companyName='First Bank Corporation';
+
+5) 
+SELECT employeeName, street, city 
+FROM employee 
+INNER JOIN works ON employee.employeeName = works.employeeName 
+WHERE companyName='First Bank Corporation' AND salary>10000;
+
+6)
+SELECT * 
+FROM employee
+INNER JOIN works ON employee.employeeName = works.employeeName
+WHERE companyName<>'First Bank Corporation'; -- Not equal to can either be represented as != or <> (whichever works in this soft.)
+
+7)
+SELECT employeeName
+FROM employee
+INNER JOIN manages ON employee.employeeName = manages.employeeName
+WHERE managerName='Smith Jones';
+
+8)
+SELECT managerName
+FROM manages
+INNER JOIN employee ON manages.managerName = employee.employeeName
+WHERE city='Varanasi';
+
+9)
+SELECT * 
+FROM employee
+WHERE employeeName LIKE 'P%'; 
+-- P% looks up for all those names which start with 'P'
+
+10)
+SELECT *
+FROM employee
+WHERE employeeName LIKE '%a';
+-- %a looks up for all those names which end with 'a'
+
+11)
+SELECT employeeName
+FROM works
+WHERE 
+
+ 
