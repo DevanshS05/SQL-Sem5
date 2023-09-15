@@ -17,8 +17,8 @@ CREATE TABLE employee (
 2 )
 CREATE TABLE works (
 	employeeName varchar(30) NOT NULL PRIMARY KEY,
-	companyName varchar(30) UNIQUE,
-	salary varchar(10),
+	companyName varchar(30),
+	salary int(8),
 	FOREIGN KEY (employeeName) REFERENCES employee(employeeName)
 );
 
@@ -26,7 +26,6 @@ CREATE TABLE works (
 CREATE TABLE company (
 	companyName varchar(30) NOT NULL PRIMARY KEY,
 	city varchar(30),
-	FOREIGN KEY (companyName) REFERENCES works(companyName)
 );
 
 4)
@@ -54,25 +53,25 @@ FROM works
 WHERE salary BETWEEN 20000 AND 50000;
 
 4) 
-SELECT name,city 
+SELECT Employee.employeeName, city 
 FROM employee 
 INNER JOIN works ON employee.employeeName = works.employeeName
 WHERE companyName='First Bank Corporation';
 
 5) 
-SELECT employeeName, street, city 
-FROM employee 
-INNER JOIN works ON employee.employeeName = works.employeeName 
-WHERE companyName='First Bank Corporation' AND salary>10000;
+SELECT employee.employeeName, street, city
+FROM Employee
+INNER JOIN works ON employee.employeeName = works.employeeName
+WHERE companyName='First Bank Corporation' AND salary>=10000;
 
 6)
-SELECT * 
-FROM employee
-INNER JOIN works ON employee.employeeName = works.employeeName
+SELECT employeeName 
+FROM Works
+WHERE companyName!='First Bank Corporation';
 WHERE companyName<>'First Bank Corporation'; -- Not equal to can either be represented as != or <> (whichever works in this soft.)
 
 7)
-SELECT employeeName
+SELECT employee.employeeName
 FROM employee
 INNER JOIN manages ON employee.employeeName = manages.employeeName
 WHERE managerName='Smith Jones';
@@ -98,6 +97,9 @@ WHERE employeeName LIKE '%a';
 11)
 SELECT employeeName
 FROM works
-WHERE 
+WHERE companyName LIKE '__%s';
 
- 
+12)
+SELECT employeeName
+FROM employee
+WHERE emailID LIKE '%gmail%';

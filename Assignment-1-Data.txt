@@ -1,0 +1,61 @@
+Here is the data which is to be entered into the respective tables
+
+Table Employee :
+INSERT INTO Employee 
+VALUES ('Harsh Gupta', 'Bank Colony', 'Varanasi' , 'harshisonline@hotmail.com'),
+('Pranjal Sharma', 'Civil Lines', 'Kanpur', 'sharmapranjal@gmail.com'),
+('Harish Rawat', 'Tilak Marg' , 'New Delhi', 'harishoff@yahoo.co.in'),
+('Devendra Gupta', 'City Cantt', 'Varanasi', 'devgup010@gmail.com'),
+('Romsha Singh', 'Chowk', 'Varanasi', 'romsha056@rediff.in'),
+('Yash Verma', 'Marine Drive', 'Bombay', 'varyash@gmail.com'),
+('Devansh Singh', 'Kartvya Path', 'New Delhi', 'devanshs05@gmail.com'),
+('Jaya Singh', 'West Udyog Marg', 'Kolkata', 'jayaisonline@hotmail.com'),
+('Vasundhara Mishra', '1st Bank Street', 'Trivandram', 'vasundhara02012@gmail.com'),
+('Sandeep Singh', 'Civil Lines', 'Saharanpur', 'ifssandeep01@hotmail.com'),
+('Smith Jones', 'Transport Road', 'Kanpur', 'smithjones@reddif.com');
+
+Table Company :
+INSERT INTO Company
+VALUES ('First Bank Corporation', 'New Delhi'),
+('Yes Bank Corporation', 'Bombay'),
+('Kotak Mahindra Bank', 'Kolkata'),
+('Utkarsh Small Fin Bank', 'Varanasi'),
+('Kerala Bank', 'Trivandram');
+
+Table Works:
+INSERT INTO WORKS
+VALUES ('Harsh Gupta', 'Kotak Mahindra Bank', '5000'),
+('Pranjal Sharma', 'Kerala Bank', '30000'),
+('Harish Rawat', 'Yes Bank Corporation', '10000'),
+('Devendra Gupta', 'Kotak Mahindra Bank', '49000'),
+('Romsha Singh', 'Utkarsh Small Fin Bank', '50000'),
+('Yash Verma', 'Yes Bank Corporation', '15000'),
+('Devansh Singh', 'First Bank Corporation', '51000'),
+('Jaya Singh', 'First Bank Corporation', '100000'),
+('Vasundhara Mishra', 'Kerala Bank', '60000'),
+('Sandeep Singh', 'Utkarsh Small Fin Bank', '33000'),
+('Smith Jones', 'Yes Bank Corporation', '30000');
+
+Alternative Numeric values 
+INSERT INTO WORKS
+VALUES ('Harsh Gupta', 'Kotak Mahindra Bank', 5000),
+('Pranjal Sharma', 'Kerala Bank', 30000),
+('Harish Rawat', 'Yes Bank Corporation', 10000),
+('Devendra Gupta', 'Kotak Mahindra Bank', 49000),
+('Romsha Singh', 'Utkarsh Small Fin Bank', 50000),
+('Yash Verma', 'Yes Bank Corporation', 15000),
+('Devansh Singh', 'First Bank Corporation', 51000),
+('Jaya Singh', 'First Bank Corporation', 100000),
+('Vasundhara Mishra', 'Kerala Bank', 60000),
+('Sandeep Singh', 'Utkarsh Small Fin Bank', 33000),
+('Smith Jones', 'Yes Bank Corporation', 30000);
+
+Table Manages:
+-- Pay attention that all people will not be managed by someone as someone will be a manager themselves
+INSERT INTO Manages
+VALUES ('Harsh Gupta', 'Devendra Gupta'),
+('Pranjal Sharma', 'Vasundhara Mishra'),
+('Yash Verma', 'Smith Jones'),
+('Harish Rawat', 'Smith Jones'),
+('Devansh Singh','Jaya Singh'),
+('Sandeep Singh', 'Romsha Singh');
