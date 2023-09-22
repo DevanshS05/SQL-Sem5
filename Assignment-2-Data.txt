@@ -1,0 +1,45 @@
+-- for table employee
+INSERT INTO Employee 
+VALUES ('Harsh Gupta', 'Bank Colony', 'Varanasi' ),
+('Pranjal Sharma', 'Civil Lines', 'Kanpur'),
+('Harish Rawat', 'Tilak Marg' , 'New Delhi'),
+('Devendra Gupta', 'City Cantt', 'Varanasi'),
+('Romsha Singh', 'Chowk', 'Varanasi'),
+('Yash Verma', 'Marine Drive', 'Bombay'),
+('Devansh Singh', 'Kartvya Path', 'New Delhi'),
+('Jaya Singh', 'West Udyog Marg', 'Kolkata'),
+('Vasundhara Mishra', '1st Bank Street', 'Trivandram'),
+('Sandeep Singh', 'Civil Lines', 'Saharanpur'),
+('Smith Jones', 'Transport Road', 'Kanpur');
+
+-- for table company
+INSERT INTO Company
+VALUES ('First Bank Corporation', 'New Delhi'),
+('Yes Bank Corporation', 'Bombay'),
+('Kotak Mahindra Bank', 'Kolkata'),
+('Utkarsh Small Fin Bank', 'Varanasi'),
+('Kerala Bank', 'Trivandram');
+
+--For table works
+INSERT INTO WORKS
+VALUES ('Harsh Gupta', 'Kotak Mahindra Bank', 5000),
+('Pranjal Sharma', 'Kerala Bank', 30000),
+('Harish Rawat', 'Yes Bank Corporation', 10000),
+('Devendra Gupta', 'Kotak Mahindra Bank', 49000),
+('Romsha Singh', 'Utkarsh Small Fin Bank', 50000),
+('Yash Verma', 'Yes Bank Corporation', 15000),
+('Devansh Singh', 'First Bank Corporation', 51000),
+('Jaya Singh', 'First Bank Corporation', 100000),
+('Vasundhara Mishra', 'Kerala Bank', 60000),
+('Sandeep Singh', 'Utkarsh Small Fin Bank', 33000),
+('Smith Jones', 'Yes Bank Corporation', 30000);
+
+Table Manages:
+-- Pay attention that all people will not be managed by someone as someone will be a manager themselves
+INSERT INTO Manages
+VALUES ('Harsh Gupta', 'Devendra Gupta'),
+('Pranjal Sharma', 'Vasundhara Mishra'),
+('Yash Verma', 'Smith Jones'),
+('Harish Rawat', 'Smith Jones'),
+('Devansh Singh','Jaya Singh'),
+('Sandeep Singh', 'Romsha Singh');

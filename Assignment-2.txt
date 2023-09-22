@@ -1,0 +1,59 @@
+--Command for table creation
+1.
+CREATE TABLE employee (
+employeeName varchar(30) NOT NULL PRIMARY KEY,
+street varchar(30),
+city varchar(30)
+);
+
+2.
+CREATE TABLE works (
+employeeName varchar(30) NOT NULL PRIMARY KEY,
+companyName varchar(30),
+salary int(8),
+FOREIGN KEY (employeeName) REFERENCES employee(employeeName),
+FOREIGN KEY (companyName) REFERENCES company(companyName) --Company table should be created first!
+);
+
+3.
+CREATE TABLE company(
+companyName varchar(30) NOT NULL PRIMARY KEY,
+city varchar(30) NOT NULL
+);
+
+4.
+CREATE TABLE manages(
+employeeName varchar(30) NOT NULL PRIMARY KEY,
+managerName varchar(30) NOT NULL,
+FOREIGN KEY (employeeName) REFERENCES employee(employeeName),
+FOREIGN KEY (managerName) REFERENCES employee(employeeName)
+);
+
+
+--Below are the given queries
+a.
+SELECT employeeName
+FROM works
+WHERE companyName='First Bank Corporation';
+
+b.
+SELECT employee.employeeName, employee.city
+FROM employee
+INNER JOIN works ON employee.employeeName = works.employeeName
+WHERE works.companyName='First Bank Corporation';
+
+c.
+SELECT employee.employeeName, employee.street, employee.city
+FROM employee
+INNER JOIN works ON employee.employeeName = works.employeeName
+WHERE works.companyName='First Bank Corporation' AND works.salary>10000;
+
+d.
+SELECT employee.employeeName, employee.city, company.city, works.companyName
+FROM employee
+INNER JOIN works ON employee.employeeName = works.employeeName
+INNER JOIN company ON works.companyName = company.companyName
+WHERE employee.city = company.city;
+
+e.
+-- We have to  use self join
