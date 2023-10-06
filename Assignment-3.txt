@@ -1,0 +1,37 @@
+--Following are the SQL commands for creating the tables 
+1. 
+CREATE TABLE Hotel(
+hotelNo varchar(4) NOT NULL PRIMARY KEY,
+name varchar(25),
+city varchar(15)
+);
+
+2.
+CREATE TABLE Room(
+roomNo number(4) NOT NULL,
+hotelNo varchar(4) NOT NULL ,
+type char(1),
+price number(5,2),
+CONSTRAINT pk PRIMARY KEY(roomNo, hotelNo),
+FOREIGN KEY (hotelNo) REFERENCES Hotel(hotelNo)
+);
+
+3.
+CREATE TABLE Booking(
+hotelNo varchar(4) NOT NULL,
+guestNo varchar(4) NOT NULL,
+dateFrom date,
+dateTo date,
+roomNo NOT NULL,
+CONSTRAINT tpk PRIMARY KEY (hotelNo, guestNo),
+FOREIGN KEY (hotelNo) REFERENCES Hotel(hotelNo),
+FOREIGN KEY (guestNo) REFERENCES Guest(guestNo),
+FOREIGN KEY (roomNo,hotelNo) REFERENCES Room(roomNo, hotelNo)
+);
+
+4.
+CREATE TABLE Guest(
+guestNo varchar(4) NOT NULL PRIMARY KEY,
+name varchar(20),
+city varchar(15)
+)
