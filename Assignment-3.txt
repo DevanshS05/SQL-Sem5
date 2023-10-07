@@ -10,7 +10,7 @@ city varchar(15)
 CREATE TABLE Room(
 roomNo number(4) NOT NULL,
 hotelNo varchar(4) NOT NULL ,
-type char(1),
+type char(1) CHECK(type='S' OR type='N'),
 price number(5,2),
 CONSTRAINT pk PRIMARY KEY(roomNo, hotelNo),
 FOREIGN KEY (hotelNo) REFERENCES Hotel(hotelNo)
@@ -35,3 +35,84 @@ guestNo varchar(4) NOT NULL PRIMARY KEY,
 name varchar(20),
 city varchar(15)
 )
+
+-- Below are the SQL queries:
+1.
+SELECT hotel.hotelNo, hotel.name, hotel.city, room.roomNo, room.type, room.price
+FROM hotel 
+INNER JOIN room ON hotel.hotelNo = room.hotelNo
+
+2.
+SELECT hotel.hotelNo, hotel.name, hotel.city, room.roomNo, room.type, room.price
+FROM hotel 
+INNER JOIN room ON hotel.hotelNo = room.hotelNo
+WHERE hotel.city='New York'
+
+3.
+SELECT name, city
+FROM guest
+order by city
+
+4.
+SELECT *
+FROM ROOM
+WHERE type='N'
+ORDER BY price
+
+5.
+SELECT COUNT(name) AS "Number of Hotels" 
+FROM hotel
+
+6.
+SELECT distinct city 
+from guest
+
+7.
+SELECT TO_CHAR(AVG(price),'999.99') AS "Average Room Price" FROM room
+
+8.
+select hotel.name, room.roomNo, room.type
+FROM hotel
+INNER JOIN room ON hotel.hotelNo = room.hotelNo
+
+9.
+select hotel.name, booking.roomNo, booking.dateFrom
+FROM hotel
+INNER JOIN booking ON hotel.hotelNo = booking.hotelNo
+WHERE hotel.city='New York'
+
+10.
+SELECT count(dateFrom) AS "Bookings started in Sep"
+FROM booking
+WHERE dateFrom>='01-SEP-99' AND dateTo<='30-SEP-99'
+
+11.
+SELECT guest.name, guest.city, guest.guestNo, booking.hotelNo
+FROM guest
+INNER JOIN booking ON guest.guestNo = booking.guestNo
+INNER JOIN hotel ON booking.hotelNo = hotel.hotelNo
+WHERE hotel.city='New York' and booking.dateFrom>='01-AUG-99' and booking.dateTo<='31-AUG-99'
+
+12.
+SELECT hotel.name, room.roomNo AS "Room Number"
+FROM hotel
+INNER JOIN room ON hotel.hotelNo = room.hotelNo
+WHERE room.roomNo NOT IN (SELECT roomNo FROM booking)
+
+13.
+SELECT hotel.name, hotel.city
+FROM Hotel
+INNER JOIN room ON hotel.hotelNo = room.hotelNo
+WHERE room.price=MAX(SELECT price FROM room)
+
+14.
+SELECT hotel.name, room.roomNo, hotel.city, room.price
+FROM hotel 
+INNER JOIN room on hotel.hotelNo = room.hotelNo
+WHERE room.price<(SELECT MIN(room.price) FROM room INNER JOIN hotel ON room.hotelNo = hotel.hotelNo WHERE hotel.city='Boston')
+
+15.
+SELECT hotel.city, AVG(room.price) AS "Average Price"
+FROM hotel
+INNER JOIN room ON hotel.hotelNo = room.hotelNo
+GROUP BY hotel.city
