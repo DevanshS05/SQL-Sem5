@@ -1,0 +1,46 @@
+--Following are the queries for creating the tables
+
+1.
+CREATE TABLE Flights(
+flno number(4) NOT NULL PRIMARY KEY,
+from varchar(15),
+to varchar(15), 
+distance number(5), 
+departs time,
+arrives time,
+price number(10)
+);
+
+2.
+CREATE TABLE Aircraft(
+aid number(4) PRIMARY KEY NOT NULL,
+aname varchar(20),
+cruisingRange number(5)
+);
+
+3.
+CREATE TABLE Certified(
+eid number(4),
+aid number(4)
+CONSTRAINT pk PRIMARY KEY (eid, aid),
+FOREIGN KEY (eid) REFERENCES Employees(eid),
+FOREIGN KEY (aid) REFERENCES Aircraft(aid)
+);
+
+4.
+CREATE TABLE Employee(
+eid number(4) PRIMARY KEY NOT NULL,
+ename varchar(30),
+salary number(5)
+)
+
+--The SQL queries are as follows:
+1.
+SELECT aname 
+FROM Aircraft
+INNER JOIN Certified ON Aircraft.aid = Certified.aid
+INNER JOIN Employess ON Certified.eid = Employees.eid
+WHERE Employees.salary>80000;
+
+2.
+SELECT 

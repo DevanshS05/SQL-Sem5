@@ -93,7 +93,7 @@ INNER JOIN booking ON guest.guestNo = booking.guestNo
 INNER JOIN hotel ON booking.hotelNo = hotel.hotelNo
 WHERE hotel.city='New York' and booking.dateFrom>='01-AUG-99' and booking.dateTo<='31-AUG-99'
 
-12.
+12.,
 SELECT hotel.name, room.roomNo AS "Room Number"
 FROM hotel
 INNER JOIN room ON hotel.hotelNo = room.hotelNo
