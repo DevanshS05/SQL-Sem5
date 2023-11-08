@@ -3,8 +3,8 @@
 1.
 CREATE TABLE Flights(
 flno number(4) NOT NULL PRIMARY KEY,
-from varchar(15),
-to varchar(15), 
+fromLocation varchar(15),
+toLocation varchar(15), 
 distance number(5), 
 departs time,
 arrives time,
@@ -28,19 +28,77 @@ FOREIGN KEY (aid) REFERENCES Aircraft(aid)
 );
 
 4.
-CREATE TABLE Employee(
+CREATE TABLE Employees(
 eid number(4) PRIMARY KEY NOT NULL,
 ename varchar(30),
 salary number(5)
 )
 
 --The SQL queries are as follows:
-1.
+a.
 SELECT aname 
 FROM Aircraft
 INNER JOIN Certified ON Aircraft.aid = Certified.aid
 INNER JOIN Employess ON Certified.eid = Employees.eid
 WHERE Employees.salary>80000;
 
-2.
-SELECT 
+b.
+SELECT certified.eid, max(aircraft.cruisingRange)
+FROM Certified
+INNER JOIN aircraft ON certified.aid = aircraft.aid
+WHERE eid IN (SELECT eid FROM certified GROUP BY eid HAVING COUNT(*)>=3)
+GROUP BY eid;
+
+c.
+SELECT ename
+FROM Employee
+WHERE salary<(SELECT min(price) FROM Flights WHERE fromLocation='Los Angeles' AND toLocation='Honolulu')
+AND eid in (SELECT eid FROM Certified);
+
+d.
+SELECT aircraft.aname AS 'Aircraft Name', FORMAT(avg(employees.salary), '99999.99') AS 'Avg Salary'
+FROM Aircraft
+INNER JOIN Certified ON Aircraft.aid = Certified.aid
+INNER JOIN Employees ON Certified.eid = Employees.eid
+WHERE Aircraft.cruisingRange>1000
+GROUP BY aircraft.aid, aircraft.aname
+
+e.
+SELECT DISTINCT Employees.ename
+FROM Employees
+INNER JOIN Certified ON Employees.eid = Certified.eid
+INNER JOIN Aircraft ON Certified.aid = Aircraft.aid
+WHERE Aircraft.aname='Boeing'
+
+f.
+SELECT aid 
+FROM Aircraft
+WHERE cruisingRange>(SELECT distance FROM FLights WHERE fromLocation='Los Angeles' AND toLocation='Chicago')
+
+g.
+SELECT fromLocation AS 'From', toLocation AS 'To'
+FROM Flights
+WHERE distance<=(SELECT max(Aircraft.cruisingRange)
+FROM Aircraft
+INNER JOIN Certified ON Aircraft.aid = Certified.aid
+INNER JOIN Employees ON Certified.eid = Employees.eid
+WHERE Employees.salary>=100000)
+
+h.
+SELECT Employees.ename 
+FROM Employees
+INNER JOIN Certified ON Employees.eid = Certified.eid
+INNER JOIN Aircraft ON Certified.aid = Aircraft.aid
+WHERE Aircraft.cruisingRange>3000
+
+i.
+--Weird question
+
+j.
+SELECT avg(salary)-(SELECT avg(salary) FROM Employees WHERE eid IN (SELECT eid FROM Certified)) AS 'Salary Difference' FROM Employees
+--Cant get the format function to work in here
+
+h.
+SELECT ename, salary
+FROM Employees
+WHERE eid NOT IN (SELECT eid FROM Certified) AND salary>(SELECT avg(salary) FROM Employees INNER JOIN Certified ON Employees.eid = Certified.eid)
