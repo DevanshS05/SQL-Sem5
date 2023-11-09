@@ -89,7 +89,7 @@ SELECT Employees.ename
 FROM Employees
 INNER JOIN Certified ON Employees.eid = Certified.eid
 INNER JOIN Aircraft ON Certified.aid = Aircraft.aid
-WHERE Aircraft.cruisingRange>3000
+WHERE Aircraft.cruisingRange>3000 AND Aircraft.aname!='Boeing'
 
 i.
 --Weird question
@@ -98,7 +98,7 @@ j.
 SELECT avg(salary)-(SELECT avg(salary) FROM Employees WHERE eid IN (SELECT eid FROM Certified)) AS 'Salary Difference' FROM Employees
 --Cant get the format function to work in here
 
-h.
+k.
 SELECT ename, salary
 FROM Employees
 WHERE eid NOT IN (SELECT eid FROM Certified) AND salary>(SELECT avg(salary) FROM Employees INNER JOIN Certified ON Employees.eid = Certified.eid)
